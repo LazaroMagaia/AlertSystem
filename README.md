@@ -1,3 +1,4 @@
+![Screenshot from 2022-03-10 22-24-48](https://user-images.githubusercontent.com/56995258/157751683-f9534837-a70a-4145-8d85-f4d9fa6b979b.png)
 <h1>Alert system</h1>
 
 Status: development ⚠️
