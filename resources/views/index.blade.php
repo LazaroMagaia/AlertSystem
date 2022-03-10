@@ -18,12 +18,39 @@
                     <input type="text" name="domain" value="{{old('domain')}}"
                     placeholder="exemplo.co.mz">
                     <button type="submit">
-                        <span >Descobrir</span>
+                        <span>Descobrir</span>
                     </button>
                 </form>
                 @if ($errors->any())
                 <span class="error-txt">preencha o campo acima</span>
                 @endif
+            </div>
+            <div class='server-response'>
+                @if(session('mensagem'))
+                @if(session('response') == true)
+                    <div>
+                        <div class="response">
+                            <p>Esta tudo certo</p>imagem
+                        </div>
+                        <span>Esta tudo normal por aqui</span>
+                    </div>
+                    @else
+                    <div>
+                        <div class="response">
+                        <p>Realmente esta fora</p>
+                        imagem
+                        </div>
+                        <span>Não conseguimos acessar o seu site</span>
+                    </div>
+                    @endif
+                @endif
+
+                <!--
+                <div v-if="erros === true">
+                    <p>Não conseguimos acessar o site</p>
+                    <span>tem certeza que é esse o dominio ?</span>
+                </div>
+            -->
             </div>
         </div>
     </div>
@@ -48,11 +75,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>domain.name_url</td>
-                                    <td>domain.time_search</td>
-                                    <td >FUNCIONANDO NORMALMENTE</td>
-                                </tr>
+                                @foreach ($servers as $server)
+                                    <tr>
+                                        <td>{{$server->name_url}}</td>
+                                        <td>{{date('m-d-Y H:i:s', strtotime($server->time_search))}}</td>
+                                        @if ($server->status)
+                                        <td>FUNCIONANDO NORMALMENTE</td>
+                                        @else
+                                        <td>FORA DO AR</td>
+                                        @endif
+                                    </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
                     </div>
